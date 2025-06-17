@@ -1,6 +1,6 @@
 # Anime Subtitle Chatbot with Google Gemini
 
-A chatbot that uses the Google Gemini API (`gemini-2.5-pro-preview-03-25`) to generate contextual responses to anime dialogue inputs, using few-shot prompting based on the [Anime Subtitles Dataset](https://www.kaggle.com/jef1056/anime-subtitles).
+A chatbot that uses the Google Gemini API (`gemini-2.5-pro`) to generate contextual responses to anime dialogue inputs, using few-shot prompting based on the [Anime Subtitles Dataset](https://www.kaggle.com/jef1056/anime-subtitles).
 
 This project was migrated from an older `trax` implementation and subsequently refactored from a local Hugging Face `distilgpt2` model to use the Gemini API.
 
@@ -82,4 +82,4 @@ python src/scripts/predict.py --input_file path/to/your_prompts.txt --output_fil
 
 ## Model Architecture
 
-This project uses the Google Gemini API (`gemini-2.5-pro-preview-03-25` model) to generate dialogue responses. It employs few-shot prompting, providing the API with examples from `input.txt` and `output.txt` to guide the generation style and context. No local model training or fine-tuning is performed.
+This project uses the Google Gemini API (`gemini-2.5-pro` model) to generate dialogue responses. It employs few-shot prompting, providing the API with examples from `input.txt` and `output.txt` to guide the generation style and context. No local model training or fine-tuning is performed.
