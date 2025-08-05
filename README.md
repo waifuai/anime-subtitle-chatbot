@@ -4,82 +4,81 @@ A chatbot that uses the Google Gemini API (`gemini-2.5-pro`) to generate context
 
 This project was migrated from an older `trax` implementation and subsequently refactored from a local Hugging Face `distilgpt2` model to use the Gemini API.
 
+## What's New: Google GenAI SDK
+
+The project now uses the official Google GenAI SDK with the centralized client:
+- Import: `from google import genai`
+- Client: `client = genai.Client(api_key=...)` (env var preferred; key file fallback)
+- Generation: `client.models.generate_content(model="gemini-2.5-pro", contents=...)`
+
+Benefits: unified auth/config, simpler extension to chats/files/streaming. The previous `google.generativeai` is no longer used.
+
 ## Setup
 
-1.  **Clone the repository:**
+1.  Clone the repository:
     ```bash
-    git clone https://github.com/waifuai/anime-subtitle-chatbot-trax # Or your repo URL
+    git clone https://github.com/waifuai/anime-subtitle-chatbot-trax
     cd anime-subtitle-chatbot-trax
     ```
-2.  **Create and activate a virtual environment:** (Recommended)
-    ```bash
-    # Using venv
-    python -m venv .venv
-    source .venv/bin/activate # Linux/macOS
-    # .venv\Scripts\activate # Windows
 
-    # Or using uv (if installed)
+2.  Create the uv virtual environment and ensure tooling (Windows venv shim path shown):
+    ```bash
     python -m uv venv .venv
-    source .venv/bin/activate # Linux/macOS
-    # .venv\Scripts\activate # Windows
+    .venv/Scripts/python.exe -m ensurepip
+    .venv/Scripts/python.exe -m pip install uv
     ```
-3.  **Install dependencies:**
+
+3.  Install dependencies:
     ```bash
-    # Using uv (recommended if using uv venv)
-    python -m uv pip install -e ./src/anime_chatbot[test]
-
-    # Or using pip
-    pip install -e ./src/anime_chatbot[test]
+    .venv/Scripts/python.exe -m uv pip install -r requirements.txt
+    .venv/Scripts/python.exe -m uv pip install -e ./src/anime_chatbot[test]
     ```
-    This will install the `google-generativeai` library and `pytest` for testing.
 
-4.  **Set up API Key:**
-    *   Obtain an API key from [Google AI Studio](https://aistudio.google.com/app/apikey).
-    *   Create a file named `.api-gemini` in your **home directory** (e.g., `~/.api-gemini` on Linux/macOS or `C:\Users\YourUsername\.api-gemini` on Windows).
-    *   Paste your API key into this file on a single line and save it. The script will read the key from this location.
+4.  Set up API Key:
+    - Preferred: set `GEMINI_API_KEY` (or `GOOGLE_API_KEY`) in your environment.
+    - Fallback: create a single-line file at `~/.api-gemini` (Windows: `C:\Users\YourUsername\.api-gemini`) containing your key.
+    - Get a key from: https://aistudio.google.com/app/apikey
 
-5.  **Prepare Example Data:** (Optional but Recommended for better results)
-    *   Place paired input/response text files named `input.txt` (one input phrase per line) and `output.txt` (corresponding response phrases) in the `src/local_data/data/` directory. These will be used for few-shot prompting. The repository includes example files.
+5.  Prepare Example Data (optional, improves style consistency):
+    - Place `input.txt` and `output.txt` under `src/local_data/data/`. Example files are included.
 
 ## Prediction
 
-Generate responses using the Gemini API via the prediction script:
-
-**Interactive Mode:**
+Interactive mode:
 ```bash
-# Ensure your virtual environment is active
-python src/scripts/predict.py
+.venv/Scripts/python.exe -m python src/scripts/predict.py
 ```
-Enter input phrases at the prompt. Type `quit` or press `Ctrl+D` to exit.
+Type `quit` or press `Ctrl+D` to exit.
 
-**Batch Mode:**
+Batch mode:
 ```bash
-python src/scripts/predict.py --input_file path/to/your_prompts.txt --output_file path/to/save_responses.txt
+.venv/Scripts/python.exe -m python src/scripts/predict.py --input_file path/to/prompts.txt --output_file path/to/responses.txt
 ```
-*   `--input_file`: Path to a file with one input prompt per line.
-*   `--output_file`: (Optional) Path to save the generated responses. Defaults to `output_responses.txt` in the current directory.
-*   `--data_dir`: (Optional) Path to the directory containing `input.txt` and `output.txt` for few-shot examples. Defaults to `src/local_data/data/`. See `python src/scripts/predict.py --help`.
+- `--input_file`: text file with one prompt per line
+- `--output_file`: optional output path (default: `./output_responses.txt`)
+- `--data_dir`: optional few-shot data directory (default: `src/local_data/data/`)
 
 ## Project Structure
 
 ```
 .
 ├── src/
-│   ├── anime_chatbot/          # Core module definition (mainly setup.py)
+│   ├── anime_chatbot/
 │   │   ├── __init__.py
 │   │   └── setup.py
-│   ├── local_data/             # Data storage (gitignored by default)
-│   │   └── data/               # Example input/output files for few-shot prompting
-│   ├── scripts/                # Python script for prediction
+│   ├── local_data/
+│   │   └── data/
+│   ├── scripts/
 │   │   └── predict.py
-│   └── tests/                  # Pytest tests
+│   └── tests/
 │       └── test_chatbot.py
 ├── .gitignore
 ├── LICENSE
 ├── pytest.ini
-└── README.md                   # This file
+├── requirements.txt
+└── README.md
 ```
 
-## Model Architecture
+## Model
 
-This project uses the Google Gemini API (`gemini-2.5-pro` model) to generate dialogue responses. It employs few-shot prompting, providing the API with examples from `input.txt` and `output.txt` to guide the generation style and context. No local model training or fine-tuning is performed.
+Standardized on `gemini-2.5-pro`. Few-shot prompting uses `src/local_data/data/input.txt` and `output.txt`. No fine-tuning or local training is performed.
