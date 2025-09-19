@@ -1,3 +1,11 @@
+"""
+Package setup configuration for the Anime Chatbot.
+
+This module defines the package metadata, dependencies, and installation
+configuration for the anime_chatbot package using setuptools. It specifies
+required packages, test dependencies, and package discovery settings.
+"""
+
 from setuptools import find_packages
 from setuptools import setup
 

@@ -1,3 +1,11 @@
+"""
+Provider selection and configuration for the Anime Subtitle Chatbot.
+
+This module handles the selection and configuration of AI providers (Gemini and OpenRouter)
+based on command-line arguments, environment variables, and configuration files.
+It provides a unified interface for generating responses across different AI providers.
+"""
+
 from __future__ import annotations
 import os
 from dataclasses import dataclass

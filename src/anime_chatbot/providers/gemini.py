@@ -1,3 +1,11 @@
+"""
+Google Gemini provider for the Anime Subtitle Chatbot.
+
+This module implements the GeminiProvider class, which handles authentication,
+prompt building, and response generation using the Google Gemini API with
+proper error handling, content filtering, and logging capabilities.
+"""
+
 from __future__ import annotations
 import logging
 import os

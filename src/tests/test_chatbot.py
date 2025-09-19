@@ -1,3 +1,12 @@
+"""
+Test suite for the Anime Subtitle Chatbot.
+
+This module contains comprehensive unit tests and integration tests for all
+components of the anime chatbot system, including provider implementations,
+provider selection logic, prediction functionality, and CLI interfaces.
+Uses pytest fixtures and mocking to ensure reliable and isolated testing.
+"""
+
 import pytest
 import os
 import pathlib

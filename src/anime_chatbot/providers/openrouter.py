@@ -1,3 +1,12 @@
+"""
+OpenRouter provider for the Anime Subtitle Chatbot.
+
+This module implements the OpenRouterProvider class, which handles authentication,
+prompt building, and response generation using the OpenRouter API with proper
+error handling, retry logic, and logging capabilities. Supports multiple models
+through the OpenRouter unified API.
+"""
+
 from __future__ import annotations
 import logging
 import os

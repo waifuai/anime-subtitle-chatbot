@@ -1,3 +1,12 @@
+"""
+Main prediction script for the Anime Subtitle Chatbot.
+
+This module provides the command-line interface and core prediction functionality
+for generating anime dialogue responses using configurable AI providers. It supports
+both interactive mode for real-time conversations and batch mode for processing
+multiple prompts from files.
+"""
+
 import argparse
 import logging
 import os
