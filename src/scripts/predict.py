@@ -69,7 +69,7 @@ def predict(input_file: Optional[str] = None,
         input_file: Path to file with prompts (one per line) for batch mode.
         output_file: Path to save responses in batch mode.
         data_dir: Directory containing input.txt and output.txt for examples.
-        provider: Provider to use ('openrouter' or 'gemini').
+        provider: Provider to use ('openrouter').
         model: Model override for the selected provider.
     """
     logger.info("Starting prediction process")
@@ -262,8 +262,8 @@ if __name__ == "__main__":
     parser.add_argument("--input_file", type=str, default=None, help="Path to a file containing input prompts (one per line) for batch mode.")
     parser.add_argument("--output_file", type=str, default=None, help="Path to save the generated responses in batch mode (defaults to output_responses.txt).")
     parser.add_argument("--data_dir", type=str, default=DEFAULT_DATA_DIR, help="Directory containing input.txt and output.txt for examples.")
-    parser.add_argument("--provider", type=str, default=None, choices=["openrouter", "gemini"], help="Provider to use. Defaults to openrouter.")
-    parser.add_argument("--model", type=str, default=None, help="Model override. Otherwise reads ~/.model-openrouter or ~/.model-gemini by provider, with sensible defaults.")
+    parser.add_argument("--provider", type=str, default=None, help="Provider to use. Only 'openrouter' is supported.")
+    parser.add_argument("--model", type=str, default=None, help="Model override. Otherwise reads ~/.model-openrouter, with sensible defaults.")
 
     args = parser.parse_args()
     predict(

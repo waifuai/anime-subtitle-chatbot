@@ -1,9 +1,9 @@
 """
 Provider selection and configuration for the Anime Subtitle Chatbot.
 
-This module handles the selection and configuration of AI providers (Gemini and OpenRouter)
+This module handles the selection and configuration of the AI provider (OpenRouter)
 based on command-line arguments, environment variables, and configuration files.
-It provides a unified interface for generating responses across different AI providers.
+It provides a unified interface for generating responses.
 """
 
 from __future__ import annotations
@@ -12,11 +12,9 @@ from dataclasses import dataclass
 from typing import Optional, List, Tuple
 
 from .providers.openrouter import OpenRouterProvider
-from .providers.gemini import GeminiProvider
 
-DEFAULT_PROVIDER = "openrouter"  # OpenRouter is default
+DEFAULT_PROVIDER = "openrouter"
 
-MODEL_FILE_GEMINI = ".model-gemini"
 MODEL_FILE_OPENROUTER = ".model-openrouter"
 
 
@@ -56,8 +54,6 @@ def resolve_model(provider: str, override: Optional[str] = None) -> Optional[str
         return override.strip()
     if provider == "openrouter":
         return _read_model_file(MODEL_FILE_OPENROUTER) or OpenRouterProvider.DEFAULT_MODEL
-    if provider == "gemini":
-        return _read_model_file(MODEL_FILE_GEMINI) or GeminiProvider.DEFAULT_MODEL
     return None
 
 
@@ -71,9 +67,6 @@ def generate_response(prompt_text: str,
                                     max_retries=cfg.max_retries,
                                     retry_backoff_seconds=cfg.retry_backoff_seconds)
         return client.generate(prompt_text, examples, model)
-    elif provider == "gemini":
-        client = GeminiProvider(timeout=cfg.timeout)
-        return client.generate(prompt_text, examples, model)
     else:
-        print(f"Unknown provider: {provider}")
+        print(f"Unknown provider: {provider}. Only 'openrouter' is supported.")
         return None

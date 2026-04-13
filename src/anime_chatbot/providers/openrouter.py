@@ -26,7 +26,7 @@ class OpenRouterProvider:
     using the OpenRouter API with proper error handling, logging, and retries.
     """
     API_URL = "https://openrouter.ai/api/v1/chat/completions"
-    DEFAULT_MODEL = "deepseek/deepseek-chat-v3-0324:free"
+    DEFAULT_MODEL = "openrouter/free"
     API_KEY_FILE = Path.home() / ".api-openrouter"
 
     def __init__(self, timeout: int = 60, max_retries: int = 2, retry_backoff_seconds: float = 1.0) -> None:
