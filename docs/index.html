@@ -39,17 +39,17 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.8rem; paddin
 <h1>Anime Subtitle Chatbot</h1>
 <p>Documentation hub for AI agents and developers</p>
 </header>
-# Anime Subtitle Chatbot with OpenRouter AI
+<h1>Anime Subtitle Chatbot with OpenRouter AI</h1>
 
 A flexible chatbot that generates contextual responses to anime dialogue inputs using few-shot prompting based on the [Anime Subtitles Dataset](https://www.kaggle.com/jef1056/anime-subtitles). The project uses the OpenRouter API for access to multiple AI models.
 
 This project was migrated from an older `trax` implementation and subsequently refactored from a local Hugging Face `distilgpt2` model to use external AI APIs with the OpenRouter provider.
 
-## Provider
+<h2>Provider</h2>
 
 The chatbot uses **OpenRouter** as its sole AI provider, giving access to various models including DeepSeek through a unified API.
 
-## Setup
+<h2>Setup</h2>
 
 1.  Clone the repository:
     ```bash
@@ -78,31 +78,31 @@ The chatbot uses **OpenRouter** as its sole AI provider, giving access to variou
 5.  Prepare Example Data (optional, improves style consistency):
     - Place `input.txt` and `output.txt` under `src/local_data/data/`. Example files are included.
 
-## Usage
+<h2>Usage</h2>
 
-### Interactive Mode
+<h3>Interactive Mode</h3>
 ```bash
 .venv/Scripts/python.exe -m python src/scripts/predict.py
 ```
 Type `quit` or press `Ctrl+D` to exit.
 
-### Batch Mode
+<h3>Batch Mode</h3>
 ```bash
 .venv/Scripts/python.exe -m python src/scripts/predict.py --input_file path/to/prompts.txt --output_file path/to/responses.txt
 ```
 
-### Custom Model
+<h3>Custom Model</h3>
 ```bash
 .venv/Scripts/python.exe -m python src/scripts/predict.py --model openrouter/free
 ```
 
-### Command Line Options
+<h3>Command Line Options</h3>
 - `--input_file`: text file with one prompt per line for batch processing
 - `--output_file`: optional output path (default: `./output_responses.txt`)
 - `--data_dir`: optional few-shot data directory (default: `src/local_data/data/`)
 - `--model`: specific model to use (overrides default)
 
-## Project Structure
+<h2>Project Structure</h2>
 
 ```
 .
@@ -129,24 +129,24 @@ Type `quit` or press `Ctrl+D` to exit.
 └── README.md                 # This file
 ```
 
-## Models
+<h2>Models</h2>
 
-### Default Model
+<h3>Default Model</h3>
 - **OpenRouter**: `openrouter/free`
 
-### Custom Model Selection
+<h3>Custom Model Selection</h3>
 - Create `~/.model-openrouter` file with custom OpenRouter model name
 - Use `--model` CLI parameter to override
 - Set environment variable `OPENROUTER_API_KEY`
 
-### Few-Shot Prompting
+<h3>Few-Shot Prompting</h3>
 - Uses examples from `src/local_data/data/input.txt` and `output.txt`
 - No fine-tuning or local training is performed
 - Examples improve style consistency and response quality
 
-## Development
+<h2>Development</h2>
 
-### Running Tests
+<h3>Running Tests</h3>
 ```bash
 # Install with test dependencies
 .venv/Scripts/python.exe -m uv pip install -e ./src/anime_chatbot[test]
@@ -158,7 +158,7 @@ Type `quit` or press `Ctrl+D` to exit.
 .venv/Scripts/python.exe -m pytest --cov=src/anime_chatbot --cov-report=html
 ```
 
-### Project Architecture
+<h3>Project Architecture</h3>
 - **Provider Pattern**: Clean separation between different AI services
 - **Configuration Management**: Environment variables and file-based config
 - **Error Handling**: Comprehensive error handling with user-friendly messages
