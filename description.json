@@ -1,6 +1,0 @@
-{
-  "title": "Anime Subtitle Chatbot with OpenRouter AI",
-  "link": "./anime-subtitle-chatbot",
-  "description": "Dive into the exciting world of anime dialogue generation with this flexible chatbot! Built on the Anime Subtitles Dataset, it crafts contextual responses to user inputs using few-shot prompting for authentic, style-consistent replies. Powered by the OpenRouter API for cost-effective access to diverse models including DeepSeek. Easily extensible with the provider-based architecture. Setup is straightforward: clone, create a virtual env with uv, install deps, and configure your OpenRouter API key via env var or file. Run interactively for real-time chats or batch process prompts for efficiency. Enhanced by example data for better outputs, this project uses powerful external APIs for scalability and reliability. Perfect for anime fans and developers exploring AI-driven conversations!",
-  "description_small": "Anime Subtitle Chatbot: Generate witty, contextual replies to anime dialogues! Powered by few-shot prompting from the Anime Subtitles Dataset, with OpenRouter for diverse AI models. Interactive or batch mode, easy setup!"
-}
